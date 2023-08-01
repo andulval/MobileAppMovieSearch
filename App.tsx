@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -8,8 +8,17 @@ import {
   FlatList,
   SafeAreaView,
   TextInput,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+  Platform,
 } from "react-native";
 import { getData } from "./src/utils/data.utils";
+import Constants from "expo-constants";
+
+const navigationOptions = {
+  title: "Welcome",
+  headerStyle: { marginTop: Constants.statusBarHeight },
+};
 
 export type Movies = {
   id: string;
@@ -22,7 +31,9 @@ export type Movies = {
 type ItemProps = { title: string; poster_path: string };
 
 const Item = ({ title, poster_path }: ItemProps) => {
-  const urlImg = "https://image.tmdb.org/t/p/w154/" + poster_path;
+  const urlImg = poster_path
+    ? "https://image.tmdb.org/t/p/w154/" + poster_path
+    : "http://via.placeholder.com/640x360";
   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
@@ -30,7 +41,8 @@ const Item = ({ title, poster_path }: ItemProps) => {
         source={{
           uri: urlImg,
         }}
-        style={{ width: 200, height: 200 }}
+        resizeMode="contain"
+        style={{ width: 154, height: 231 }}
       />
     </View>
   );
@@ -38,6 +50,7 @@ const Item = ({ title, poster_path }: ItemProps) => {
 
 const App = () => {
   const [movies, setMovies] = useState<Movies[]>([]);
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -50,34 +63,46 @@ const App = () => {
     fetchMovies();
   }, []); //fetch data only on component mounting
 
+  const onSearchChange = (
+    event: NativeSyntheticEvent<TextInputChangeEventData>
+  ): void => {
+    const searchFieldString = event.nativeEvent.text; //value.toLocaleLowerCase(); //includes are case senitive
+    setSearchPhrase(searchFieldString); //zapisanie nowej wartosci i wywołanie useState
+  };
+
   return (
-    <SafeAreaView>
-      <View>
-        <StatusBar
-          animated={true}
-          backgroundColor="#61dafb"
-          // barStyle={statusBarStyle}
-          // showHideTransition={statusBarTransition}
-          // hidden={hidden}
-        />
-        <Text>First paragraph, TITLE</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={() => {}}
-          value={movies.length.toString()}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
-        />
-        <FlatList
-          data={movies}
-          renderItem={({ item }) => (
-            <Item title={item.title} poster_path={item.poster_path} /> //{item.title, item.poster_path}
-          )}
-          keyExtractor={(movie) => movie.id}
-        />
-      </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        style={navigationOptions}
+        animated={true}
+        backgroundColor="#61dafb"
+        hidden={false}
+        // backgroundColor="#00BCD4"
+        // translucent={true}
+        // barStyle={statusBarStyle}
+        // showHideTransition={statusBarTransition}
+        // hidden={hidden}
+      />
+
+      <TextInput
+        style={styles.input}
+        onChange={onSearchChange}
+        value={searchPhrase} //movies.length.toString()
+        placeholder="Search for a Movie"
+        keyboardType="default"
+      />
+
+      <Text>Search for: {searchPhrase}</Text>
+      <FlatList
+        data={movies}
+        renderItem={({ item }) => (
+          <Item title={item.title} poster_path={item.poster_path} /> //{item.title, item.poster_path}
+        )}
+        keyExtractor={(movie) => movie.id}
+      />
+
       {/* <View style={styles.container}> */}
-      <Text>Test app. Showing cat!</Text>
+      <Text>footer</Text>
       {/* {movies.map((element) => {
           return (
             <>
@@ -91,14 +116,6 @@ const App = () => {
             </>
           );
         })} */}
-      <View>
-        <Image
-          source={{
-            uri: "https://reactnative.dev/docs/assets/p_cat2.png",
-          }}
-          style={{ width: 200, height: 200 }}
-        />
-      </View>
     </SafeAreaView>
   );
 };
@@ -106,12 +123,16 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#952a3fdd",
+    backgroundColor: "#ECF0F1",
     alignItems: "center",
     justifyContent: "center",
+    // paddingHorizontal: 5,
+    marginVertical: 8,
+    width: "100%",
+    marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
   },
   item: {
-    backgroundColor: "#b7ff02",
+    backgroundColor: "#36363121",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
