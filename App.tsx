@@ -19,15 +19,24 @@ export type Movies = {
   vote_count: number;
 };
 
-type ItemProps = { title: string };
+type ItemProps = { title: string; poster_path: string };
 
-const Item = ({ title }: ItemProps) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+const Item = ({ title, poster_path }: ItemProps) => {
+  const urlImg = "https://image.tmdb.org/t/p/w154/" + poster_path;
+  return (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+      <Image
+        source={{
+          uri: urlImg,
+        }}
+        style={{ width: 200, height: 200 }}
+      />
+    </View>
+  );
+};
 
-export default function App() {
+const App = () => {
   const [movies, setMovies] = useState<Movies[]>([]);
 
   useEffect(() => {
@@ -43,29 +52,33 @@ export default function App() {
 
   return (
     <SafeAreaView>
-      <StatusBar
-        animated={true}
-        backgroundColor="#61dafb"
-        // barStyle={statusBarStyle}
-        // showHideTransition={statusBarTransition}
-        // hidden={hidden}
-      />
-      <Text>First paragraph, TITLE</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={() => {}}
-        value={movies.length.toString()}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
-      />
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => <Item title={item.title} />}
-        keyExtractor={(movie) => movie.id}
-      />
-      <View style={styles.container}>
-        <Text>Test app. Showing cat!</Text>
-        {/* {movies.map((element) => {
+      <View>
+        <StatusBar
+          animated={true}
+          backgroundColor="#61dafb"
+          // barStyle={statusBarStyle}
+          // showHideTransition={statusBarTransition}
+          // hidden={hidden}
+        />
+        <Text>First paragraph, TITLE</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={() => {}}
+          value={movies.length.toString()}
+          placeholder="useless placeholder"
+          keyboardType="numeric"
+        />
+        <FlatList
+          data={movies}
+          renderItem={({ item }) => (
+            <Item title={item.title} poster_path={item.poster_path} /> //{item.title, item.poster_path}
+          )}
+          keyExtractor={(movie) => movie.id}
+        />
+      </View>
+      {/* <View style={styles.container}> */}
+      <Text>Test app. Showing cat!</Text>
+      {/* {movies.map((element) => {
           return (
             <>
               <Text>{element.title}</Text>
@@ -78,6 +91,7 @@ export default function App() {
             </>
           );
         })} */}
+      <View>
         <Image
           source={{
             uri: "https://reactnative.dev/docs/assets/p_cat2.png",
@@ -87,7 +101,7 @@ export default function App() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -112,3 +126,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export default App;
