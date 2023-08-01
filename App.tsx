@@ -12,8 +12,9 @@ import {
   TextInputChangeEventData,
   Platform,
 } from "react-native";
-import { getData } from "./src/utils/data.utils";
 import Constants from "expo-constants";
+
+import fetchMovies, { FETCH_TYPES_TMDB } from "./src/utils/fetchTMDB";
 
 const navigationOptions = {
   title: "Welcome",
@@ -53,15 +54,23 @@ const App = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const moviesToFetch = await getData<any>(
-        "https://api.themoviedb.org/3/search/movie?query=spiderman&api_key=93118985a38288fb2faca5aa8e1143c8"
-      );
-      console.log(moviesToFetch.results);
-      setMovies(moviesToFetch.results); //.results
+    const fetchTMDB = async () => {
+      const fetch = await fetchMovies(FETCH_TYPES_TMDB.popular);
+      setMovies(fetch);
     };
-    fetchMovies();
+    fetchTMDB();
   }, []); //fetch data only on component mounting
+
+  useEffect(() => {
+    const fetchTMDB = async () => {
+      const fetch = await fetchMovies(
+        searchPhrase ? FETCH_TYPES_TMDB.search : FETCH_TYPES_TMDB.popular,
+        searchPhrase
+      );
+      setMovies(fetch);
+    };
+    fetchTMDB();
+  }, [searchPhrase]); //run when searchPhrase changes
 
   const onSearchChange = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
@@ -72,17 +81,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        style={navigationOptions}
-        animated={true}
-        backgroundColor="#61dafb"
-        hidden={false}
-        // backgroundColor="#00BCD4"
-        // translucent={true}
-        // barStyle={statusBarStyle}
-        // showHideTransition={statusBarTransition}
-        // hidden={hidden}
-      />
+      <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} />
 
       <TextInput
         style={styles.input}
@@ -100,22 +99,7 @@ const App = () => {
         )}
         keyExtractor={(movie) => movie.id}
       />
-
-      {/* <View style={styles.container}> */}
       <Text>footer</Text>
-      {/* {movies.map((element) => {
-          return (
-            <>
-              <Text>{element.title}</Text>
-              <Image
-                source={{
-                  uri: "https://reactnative.dev/docs/assets/p_cat2.png",
-                }}
-                style={{ width: 200, height: 200 }}
-              />
-            </>
-          );
-        })} */}
     </SafeAreaView>
   );
 };
@@ -126,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ECF0F1",
     alignItems: "center",
     justifyContent: "center",
-    // paddingHorizontal: 5,
+    paddingHorizontal: 5,
     marginVertical: 8,
     width: "100%",
     marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
@@ -138,12 +122,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 32,
+    fontSize: 25,
   },
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 3,
     padding: 10,
   },
 });
