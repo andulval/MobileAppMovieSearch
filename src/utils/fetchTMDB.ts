@@ -1,4 +1,4 @@
-import { Movies } from "../../App";
+import { Movies } from "../routes/mainContainer/MainContainer";
 import { getData } from "./data.utils";
 
 export const FETCH_TYPES_TMDB = {

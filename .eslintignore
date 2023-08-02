@@ -3,6 +3,11 @@
 /ios/Pods/
 # dependencies
 node_modules/
+.eslintrc.json
+ios/
+android/
+*.config.json
+App.tsx
 
 # Expo
 .expo/

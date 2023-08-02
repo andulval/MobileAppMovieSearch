@@ -23,6 +23,7 @@
       // "jsx": true,
       // "useJSXTextNode": true,
       "project": ["./tsconfig.json"]
+    //   "tsconfigRootDir": "./"
       //   "ecmaFeatures": {
       //       "jsx": true
       //   }
@@ -44,8 +45,9 @@
     //   "no-use-before-define": ["error", { "variables": false }],
     //   "react/jsx-uses-vars": "error",
     //   // ignore errors for the react-navigation package
-    //   "react/prop-types": ["error", {"ignore": ["navigation", "navigation.navigate"]}]
-    },
+      "react/prop-types": ["enabled", {"ignore": ["navigation", "navigation.navigate"]}]
+    // "react/prop-types": ["<enabled>", { "ignore": "<ignore>", "customValidators": "<customValidator>" }]
+},
     "settings": {
       "import/resolver": {
         "typescript": {}

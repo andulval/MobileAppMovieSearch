@@ -9,13 +9,13 @@
       "skipLibCheck": true
     },
     "include": [
-      ".eslintrc.json",
       "./src/**/*",
       "./babel.config.js",
-      "./jest.config.js"
+      "./jest.config.js",
+      "./.eslintrc.json",
     ],
     "exclude": [
-      "node_modules/*"
+      "node_modules/*",
     ],
     "extends": "expo/tsconfig.base"
   }
