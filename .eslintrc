@@ -45,7 +45,7 @@
     //   "no-use-before-define": ["error", { "variables": false }],
     //   "react/jsx-uses-vars": "error",
     //   // ignore errors for the react-navigation package
-      "react/prop-types": ["enabled", {"ignore": ["navigation", "navigation.navigate"]}]
+      "react/prop-types": [0, {"ignore": ["navigation", "navigation.navigate"]}]
     // "react/prop-types": ["<enabled>", { "ignore": "<ignore>", "customValidators": "<customValidator>" }]
 },
     "settings": {

@@ -1,15 +1,11 @@
 import React from "react";
 import { FlatList } from "react-native";
 import ListItem from "../listItem/listItem.component";
-import { Movies } from "../../routes/mainContainer/MainContainer";
+import { Movies } from "../../routes/mainContainer/mainContainer.component";
 
 type ElementListProps = { data: Movies[] };
 
 const ElementList = ({ data }: ElementListProps) => {
-  //   const onListItemPress = () => {
-  //     navigation.navigate("MainContainer")
-  // };
-
   return (
     <FlatList
       data={data}

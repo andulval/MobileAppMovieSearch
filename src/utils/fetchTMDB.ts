@@ -1,4 +1,4 @@
-import { Movies } from "../routes/mainContainer/MainContainer";
+import { Movies } from "../routes/mainContainer/mainContainer.component";
 import { getData } from "./data.utils";
 
 export const FETCH_TYPES_TMDB = {

@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types";
 import React from "react";
 import {
   StyleSheet,
@@ -7,10 +9,15 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
+import { RootStackParams } from "../../../App";
 import LogoIcon from "../../components/logoIcon/logoIcon.component";
 
-const Home = ({ navigation }: { navigation: any }) => {
-  //Typescript has no idea of the navigation type
+// type Props = NativeStackScreenProps<RootStackParams>;//React.FC<Props>
+
+const Home = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>(); //useful when you cannot pass the navigation prop into the component directly, or don't want to pass it in case of a deeply nested child.
+
   const buttonHandler = () => {
     navigation.navigate("MainContainer");
   };
@@ -28,10 +35,7 @@ const Home = ({ navigation }: { navigation: any }) => {
             Search fo any movie. Make best choice. Enjoy!
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={buttonHandler}
-          style={styles.BuutonContainer}
-        >
+        <TouchableOpacity onPress={buttonHandler} style={styles.ButonContainer}>
           <Text style={styles.signup}>START</Text>
         </TouchableOpacity>
       </View>
@@ -53,9 +57,9 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     width: "100%",
   },
-  BuutonContainer: {
+  ButonContainer: {
     // flex: 1,
-    marginTop: 120,
+    // marginTop: 120,
     // alignItems: "center",
     // justifyContent: "center",
   },
