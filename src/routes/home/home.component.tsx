@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { RootStackParams } from "../../../App";
+import { RootStackParams } from "../../../MainApp";
 import LogoIcon from "../../components/logoIcon/logoIcon.component";
 
 // type Props = NativeStackScreenProps<RootStackParams>;//React.FC<Props>

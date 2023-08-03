@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParams } from "../../../App";
-import { Image } from "react-native";
+import { RootStackParams } from "../../../MainApp";
+import { Image, Button } from "react-native";
 
 import { fetchMovieDetail, FETCH_TYPES_TMDB } from "../../utils/fetchTMDB";
+import { selectFavMovies } from "../../store/movies/movies.selector";
+import { addMovies } from "../../store/movies/movies.slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 type Props = NativeStackScreenProps<RootStackParams, "MovieDetails">;
 
@@ -25,12 +28,16 @@ const INIT_MOVIE_DETAILS = {
   poster_path: "",
   vote_count: 0,
   genres: [{ id: "", name: "" }],
-  production_countries: [{ iso_3166_1: "1", name: "" }],
+  production_countries: [{ iso_3166_1: "", name: "" }],
 };
 
 const MovieDetails = ({ route }: Props) => {
   const { id } = route.params;
   const [movie, setMovie] = useState<MovieDetailsProps>(INIT_MOVIE_DETAILS);
+
+  const dispatch = useAppDispatch(); //using Redux RTK
+  const favMovies = useAppSelector(selectFavMovies); //selectFavMovies using Redux RTK
+  //   const [favMovies, setFavMovies] = useState(favMovies);
 
   const {
     title,
@@ -52,7 +59,11 @@ const MovieDetails = ({ route }: Props) => {
       //   console.log("fetchMovieD", fetch.genres.map((genre)=>));
     };
     fetchMovieD();
-  }, []); // run when searchPhrase changes
+  }, []); // run only on mounting
+
+  const onPressAddFavButton = () => {
+    return dispatch(addMovies(movie)); //add new movie to favoriet list
+  };
 
   return (
     <View style={styles.item}>
@@ -81,6 +92,15 @@ const MovieDetails = ({ route }: Props) => {
             {production_country.name}
           </Text>
         );
+      })}
+      <Button
+        onPress={onPressAddFavButton}
+        title="Add Fav movie"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
+      {favMovies.map((favMovie) => {
+        return <Text key={favMovie.id}>{favMovie.title}</Text>;
       })}
       <Text>vote_count: {vote_count}</Text>
     </View>

@@ -9,22 +9,22 @@ import {
   Text,
   TextInputChangeEventData,
 } from "react-native";
-import ElementList from "../../components/elementList/elementList.component";
+import ElementsList from "../../components/elementList/elementsList.component";
 import PlainText from "../../components/plainText/plainText.component";
 import SearchInput from "../../components/search-input/search-input.component";
 
 import fetchMovies, { FETCH_TYPES_TMDB } from "../../utils/fetchTMDB";
 
-export type Movies = {
+export type Movie = {
   id: string;
   title: string;
-  overview: string;
   poster_path: string;
   vote_count: number;
+  popularity: number
 };
 
 const MainContainer = () => {
-  const [movies, setMovies] = useState<Movies[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [searchPhrase, setSearchPhrase] = useState("");
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const MainContainer = () => {
         <PlainText description="Search for: " mainValue={searchPhrase} />
       )}
       {movies.length ? ( //conditionally render text if movies is !empty
-        <ElementList data={movies} />
+        <ElementsList data={movies} />
       ) : (
         <Text>{"No items were found that match your query."}</Text>
       )}

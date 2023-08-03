@@ -1,13 +1,12 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputChangeEventData } from "react-native";
 
 type SearchBoxProps = {
   searchPhrase: string;
   placeholder?: string;
   onChangeHandler: (
     // eslint-disable-next-line no-unused-vars
-    event: any,
-    // event: NativeSyntheticEvent<TextInputChangeEventData>,
+    event: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => void;
 };
 

@@ -7,7 +7,6 @@ node_modules/
 ios/
 android/
 *.config.json
-App.tsx
 
 # Expo
 .expo/
