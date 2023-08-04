@@ -1,11 +1,20 @@
-import { configureStore } from "@reduxjs/toolkit";
-// import { useDispatch } from "react-redux";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { baseApi } from "../utils/services/base.service";
 import { movieReducer } from "./movies/movies.slice";
 
+const reducer = combineReducers({
+  // Added API generated reducer
+  movies: movieReducer,
+  [baseApi.reducerPath]: baseApi.reducer,
+});
+//   reducer: {
+//     movies: movieReducer,
+//   },
+// });
 const store = configureStore({
-  reducer: {
-    movies: movieReducer,
-  },
+  reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
 });
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;

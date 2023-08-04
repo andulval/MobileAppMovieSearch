@@ -20,7 +20,7 @@ export type Movie = {
   title: string;
   poster_path: string;
   vote_count: number;
-  popularity: number
+  popularity?: number;
 };
 
 const MainContainer = () => {
@@ -47,7 +47,7 @@ const MainContainer = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.containerM}>
       <StatusBar animated backgroundColor="#61dafb" hidden={false} />
       <SearchInput
         searchPhrase={searchPhrase}
@@ -67,7 +67,7 @@ const MainContainer = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  containerM: {
     flex: 1,
     backgroundColor: "#ECF0F1",
     alignItems: "center",

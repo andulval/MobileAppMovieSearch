@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   ButonContainer: {
     // flex: 1,
-    // marginTop: 120,
+    marginTop: 120,
     // alignItems: "center",
     // justifyContent: "center",
   },
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
     marginTop: "-25%",
+    // marginBottom: "-25%",
     marginLeft: "20%",
     marginRight: "20%",
   },
