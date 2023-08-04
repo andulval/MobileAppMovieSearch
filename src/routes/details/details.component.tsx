@@ -7,7 +7,7 @@ import { Image, Button } from "react-native";
 import { selectFavMovies } from "../../store/movies/movies.selector";
 import { addMovies } from "../../store/movies/movies.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useGetDetailMovieQuery } from "../../utils/services/user.service";
+import { useGetDetailMovieQuery } from "../../utils/services/movie.service";
 
 type Props = NativeStackScreenProps<RootStackParams, "MovieDetails">;
 
@@ -21,7 +21,7 @@ export type MovieDetailsProps = {
   production_countries: { iso_3166_1: string; name: string }[];
 };
 
-const INIT_MOVIE_DETAILS = {
+export const INIT_MOVIE_DETAILS = {
   id: "",
   title: "",
   overview: "",
@@ -43,7 +43,7 @@ const MovieDetails = ({ route }: Props) => {
     isFetching,
     isError,
     error,
-  } = useGetDetailMovieQuery(id);//fetch data using RTK Query
+  } = useGetDetailMovieQuery(id); //fetch data using RTK Query
 
   const {
     title,
@@ -68,7 +68,7 @@ const MovieDetails = ({ route }: Props) => {
   if (isError) {
     if ("status" in error) {
       // console.log({ error });
-      return <View>{error.status}</View>;
+      return <Text>{error.status}</Text>;
     } //{!!error && <Text>Something went wrong!</Text>}
   }
 

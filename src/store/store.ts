@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { baseApi } from "../utils/services/base.service";
+import { tmdbApi } from "../utils/services/base.service";
 import { movieReducer } from "./movies/movies.slice";
 
 const reducer = combineReducers({
   // Added API generated reducer
   movies: movieReducer,
-  [baseApi.reducerPath]: baseApi.reducer,
+  [tmdbApi.reducerPath]: tmdbApi.reducer,
 });
 //   reducer: {
 //     movies: movieReducer,
@@ -14,7 +14,7 @@ const reducer = combineReducers({
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware().concat(tmdbApi.middleware),
 });
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;

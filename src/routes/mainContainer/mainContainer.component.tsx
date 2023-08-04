@@ -1,6 +1,6 @@
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   NativeSyntheticEvent,
   Platform,
@@ -13,7 +13,11 @@ import ElementsList from "../../components/elementList/elementsList.component";
 import PlainText from "../../components/plainText/plainText.component";
 import SearchInput from "../../components/search-input/search-input.component";
 
-import fetchMovies, { FETCH_TYPES_TMDB } from "../../utils/fetchTMDB";
+import { INIT_MOVIE_DETAILS } from "../../routes/details/details.component";
+import {
+  useGetSearchMoviesQuery,
+  useGetPopularMoviesQuery,
+} from "../../utils/services/movie.service";
 
 export type Movie = {
   id: string;
@@ -22,21 +26,23 @@ export type Movie = {
   vote_count: number;
   popularity?: number;
 };
+export type MovieSearch = {
+  results: Movie[];
+};
 
 const MainContainer = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
   const [searchPhrase, setSearchPhrase] = useState("");
 
-  useEffect(() => {
-    const fetchTMDB = async () => {
-      const fetch = await fetchMovies(
-        searchPhrase ? FETCH_TYPES_TMDB.search : FETCH_TYPES_TMDB.popular,
-        searchPhrase,
-      );
-      setMovies(fetch);
-    };
-    fetchTMDB();
-  }, [searchPhrase]); // run when searchPhrase changes
+  const {
+    data = { results: [INIT_MOVIE_DETAILS] },
+    isLoading,
+    isFetching,
+    isError,
+    error,
+  } = searchPhrase
+    ? useGetSearchMoviesQuery(searchPhrase)
+    : useGetPopularMoviesQuery(); //fetch data using RTK Query -> in no search-input  value -> show popular movies
+  const movies = data.results;
 
   const onSearchChange = (
     // triggered whenever input value change, set newValue to searchPhrase state variable
@@ -45,6 +51,17 @@ const MainContainer = () => {
     const searchFieldString = event.nativeEvent.text; // value.toLocaleLowerCase(); //includes are case senitive
     setSearchPhrase(searchFieldString);
   };
+
+  if (isLoading || isFetching) {
+    return <Text>Loading.....</Text>;
+  }
+
+  if (isError) {
+    if ("status" in error) {
+      // console.log({ error });
+      return <Text>{error.status}</Text>;
+    } //{!!error && <Text>Something went wrong!</Text>}
+  }
 
   return (
     <SafeAreaView style={styles.containerM}>
