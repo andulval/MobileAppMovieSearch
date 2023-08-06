@@ -26,16 +26,27 @@ const Home = () => {
       source={require("../../../assets/backgroundInterstellar.jpg")}
       style={styles.background}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={styles.logoContainer}>
-          <LogoIcon style={styles.logo} fill="#eeff00" />
-          <Text variant="bodyMedium" style={styles.text}>
-            Search fo any movie. Make best choice. Enjoy!
+          <LogoIcon style={styles.logo} fill="#c3b5a4" />
+          <Text variant="headlineSmall" style={styles.text}>
+            Search fo any movie.{"\n"}Make best choice.{"\n"}Enjoy!
           </Text>
         </View>
-        <TouchableOpacity onPress={buttonHandler} style={styles.ButonContainer}>
-          <Button style={styles.startButton}>START</Button>
-        </TouchableOpacity>
+        <View style={styles.butonContainer}>
+          <TouchableOpacity onPress={buttonHandler}>
+            <Button
+              mode="contained"
+              dark={true}
+              buttonColor="#c3b5a49a"
+              style={styles.startButton}
+            >
+              <Text variant="headlineMedium" style={styles.text}>
+                {`Let's begin!`}
+              </Text>
+            </Button>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -47,49 +58,40 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   logoContainer: {
-    flex: 3,
-    marginTop: 120,
+    flex: 1,
+    marginTop: 30,
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 5,
-    marginVertical: 12,
-    width: "100%",
+    justifyContent: "flex-start",
+    // paddingHorizontal: 5,
+    // marginVertical: 12,
+    // width: "100%",
   },
   startButton: {
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "transparent",
-    borderRadius: 8,
-    padding: 5,
-    // height: 40,
-    borderWidth: 1,
-    borderColor: "green",
-    // flex: 1,
-
-    // marginTop: 120,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
-  ButonContainer: {
-    // flex: 1,
-    // marginTop: 120,
+  butonContainer: {
+    flex: 1,
+    marginBottom: 90,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   logo: {
-    width: 300,
-    height: 300,
-    color: "green",
+    width: 330,
+    height: 100,
+    fontSize: 35,
     // marginLeft: "15%",
     // marginTop: "10%",
   },
   text: {
-    fontSize: 25,
+    // fontSize: 25,
     color: "white",
-    marginTop: "-25%",
+    justifyContent: "center",
+    textAlign: "center",
+    // marginTop: "-25%",
     // marginBottom: "-25%",
-    marginLeft: "20%",
-    marginRight: "20%",
+    // marginLeft: "20%",
+    // marginRight: "20%",
   },
 });
 

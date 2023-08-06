@@ -10,14 +10,7 @@ const TagsCard = ({
   return (
     <>
       <Card mode="elevated" elevation={1} style={styles.mainConatiner}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: 20,
-            marginHorizontal: 20,
-          }}
-        >
+        <View style={styles.mainView}>
           <View style={styles.columns}>
             <Chip style={styles.chipAlignment} icon="flag" mode="outlined">
               Genres
@@ -46,6 +39,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   columns: { flex: 1, justifyContent: "center" },
+  mainView: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+    marginHorizontal: 20,
+  },
   chipAlignment: {
     justifyContent: "center",
     alignSelf: "flex-start",

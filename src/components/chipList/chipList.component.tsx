@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Chip, Text } from "react-native-paper";
 
 //optional - chips in random colors
@@ -13,22 +13,10 @@ type chipListProps = { elements: { name: string }[] };
 
 export const ChipList = ({ elements }: chipListProps) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        flexWrap: "wrap",
-        // justifyContent: "space-evenly",
-        alignItems: "flex-start",
-      }}
-    >
+    <View style={styles.mainView}>
       {elements.map((item, index) => {
         return (
-          <View
-            style={{
-              margin: 3,
-            }}
-            key={index}
-          >
+          <View style={styles.subView} key={index}>
             <Chip
               key={index}
               //   mode="outlined" //changing display mode, default is flat.
@@ -45,3 +33,15 @@ export const ChipList = ({ elements }: chipListProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mainView: {
+    flex: 1,
+    flexWrap: "wrap",
+    // justifyContent: "space-evenly",
+    alignItems: "flex-start",
+  },
+  subView: {
+    margin: 3,
+  },
+});
