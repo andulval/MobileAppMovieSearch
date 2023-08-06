@@ -65,15 +65,12 @@ const MovieCard = (movie: Movie) => {
           <View
             style={{
               flex: 1,
-
-              //   backgroundColor: "#771313",
             }}
           >
             <View
               style={{
                 flex: 1,
                 justifyContent: "center",
-                //   backgroundColor: "#771313",
               }}
             >
               <Text variant="headlineMedium">{title}</Text>
