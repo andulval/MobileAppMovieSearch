@@ -1,8 +1,7 @@
 import Constants from "expo-constants";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Platform, SafeAreaView, StyleSheet, Text } from "react-native";
-import ElementsList from "../../components/elementList/elementsList.component";
+import CardList from "../../components/cardList/cardList.component";
 import { useAppSelector } from "../../store/hooks";
 import { selectFavMovies } from "../../store/movies/movies.selector";
 
@@ -17,9 +16,8 @@ const FavoriteMovies = () => {
 
   return (
     <SafeAreaView style={styles.containerF}>
-      <StatusBar animated backgroundColor="#61dafb" hidden={false} />
       {favMovies.length ? ( //conditionally render text if movies is !empty
-        <ElementsList data={favMovies} />
+        <CardList data={favMovies} />
       ) : (
         <Text>{"No items in your favorite list."}</Text>
       )}

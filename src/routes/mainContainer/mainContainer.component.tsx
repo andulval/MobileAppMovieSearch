@@ -1,15 +1,13 @@
-import Constants from "expo-constants";
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   NativeSyntheticEvent,
-  Platform,
   SafeAreaView,
-  StyleSheet,
-  Text,
   TextInputChangeEventData,
+  StyleSheet,
+  View,
 } from "react-native";
-import ElementsList from "../../components/elementList/elementsList.component";
+import { ActivityIndicator, Text } from "react-native-paper";
+import CardList from "../../components/cardList/cardList.component";
 import PlainText from "../../components/plainText/plainText.component";
 import SearchInput from "../../components/search-input/search-input.component";
 
@@ -52,9 +50,9 @@ const MainContainer = () => {
     setSearchPhrase(searchFieldString);
   };
 
-  if (isLoading || isFetching) {
-    return <Text>Loading.....</Text>;
-  }
+  //   if (isLoading || isFetching) {
+  //     return <ActivityIndicator animating={true} size="large" />;
+  //   }
 
   if (isError) {
     if ("status" in error) {
@@ -65,19 +63,20 @@ const MainContainer = () => {
 
   return (
     <SafeAreaView style={styles.containerM}>
-      <StatusBar animated backgroundColor="#61dafb" hidden={false} />
       <SearchInput
         searchPhrase={searchPhrase}
         placeholder="Search for a Movie"
         onChangeHandler={onSearchChange}
       />
       {searchPhrase && ( //conditionally render text if searchPhrase is !empty
-        <PlainText description="Search for: " mainValue={searchPhrase} />
+        <View style={styles.searchText}>
+          <PlainText description="Search for: " mainValue={searchPhrase} />
+        </View>
       )}
-      {movies.length ? ( //conditionally render text if movies is !empty
-        <ElementsList data={movies} />
+      {isLoading || isFetching ? (
+        <ActivityIndicator animating={true} size="large" />
       ) : (
-        <Text>{"No items were found that match your query."}</Text>
+        <CardList data={movies} />
       )}
     </SafeAreaView>
   );
@@ -86,13 +85,25 @@ const MainContainer = () => {
 const styles = StyleSheet.create({
   containerM: {
     flex: 1,
-    backgroundColor: "#ECF0F1",
+    // backgroundColor: "#ECF0F1",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // paddingHorizontal: 5,
+    // marginVertical: 8,
+    // width: "100%",
+    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+  },
+  searchText: {
+    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 5,
-    marginVertical: 8,
-    width: "100%",
-    marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+    // backgroundColor: "#ECF0F1",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // paddingHorizontal: 5,
+    // marginVertical: 8,
+    // width: "100%",
+    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
   },
 });
 

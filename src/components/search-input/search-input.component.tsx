@@ -1,5 +1,10 @@
 import React from "react";
-import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputChangeEventData } from "react-native";
+import {
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInputChangeEventData,
+} from "react-native";
+import { Searchbar } from "react-native-paper";
 
 type SearchBoxProps = {
   searchPhrase: string;
@@ -16,7 +21,7 @@ const SearchInput = ({
   onChangeHandler,
 }: SearchBoxProps) => {
   return (
-    <TextInput
+    <Searchbar
       style={style.input}
       onChange={onChangeHandler}
       value={searchPhrase} // movies.length.toString()
@@ -28,10 +33,9 @@ const SearchInput = ({
 
 const style = StyleSheet.create({
   input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 3,
-    padding: 10,
+    marginBottom: 5,
+    marginTop: 15,
+    marginHorizontal: 20,
   },
 });
 

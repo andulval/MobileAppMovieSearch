@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 
 type PlainTextProps = {
   description: string;
@@ -8,20 +9,16 @@ type PlainTextProps = {
 
 function PlainText({ description, mainValue }: PlainTextProps) {
   return (
-    <Text style={style.plainTxt}>
+    <Text variant="labelLarge" style={style.plainTxt}>
       {description}
-      <Text style={style.highligth}>{mainValue}</Text>
+      <Text variant="labelLarge" style={style.highligth}>
+        {mainValue}
+      </Text>
     </Text>
   );
 }
 
 const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   plainTxt: {
     fontSize: 15,
     color: "black",

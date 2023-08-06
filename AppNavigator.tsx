@@ -7,7 +7,7 @@ import MainContainer, {
 } from "./src/routes/mainContainer/mainContainer.component";
 import MovieDetails from "./src/routes/details/details.component";
 import FavoriteMovies from "./src/routes/favoritie movies/favoriteMovies.component";
-import { Button } from "react-native";
+import { IconButton } from "react-native-paper";
 
 export type RootStackParams = {
   Home: undefined; //Specifying undefined means that the route doesn't have params. A union type with undefined (e.g. SomeType | undefined) means that params are optional.
@@ -18,7 +18,7 @@ export type RootStackParams = {
 
 const Stack = createNativeStackNavigator<RootStackParams>();
 
-const MainApp = () => {
+const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -35,13 +35,14 @@ const MainApp = () => {
           options={({ navigation }) => ({
             // headerTitle: props => <LogoTitle {...props} />,
             headerRight: () => (
-              <Button
+              <IconButton
+                icon="heart-outline"
+                // iconColor={MD3Colors.error50}
+                size={30}
                 onPress={() => navigation.navigate("FavoriteMovies")}
-                title="Favorites"
-                color="#43134e"
               />
             ),
-            headerStyle: { backgroundColor: "#0064c8" },
+            // headerStyle: { backgroundColor: "#fbff00" },
           })}
         />
         <Stack.Screen
@@ -63,4 +64,4 @@ const MainApp = () => {
   );
 };
 
-export default MainApp;
+export default AppNavigator;

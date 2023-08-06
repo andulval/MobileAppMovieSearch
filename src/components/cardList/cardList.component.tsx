@@ -1,16 +1,17 @@
 import React from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
-import ListItem from "../listItem/listItem.component";
 import { Movie } from "../../routes/mainContainer/mainContainer.component";
+import { Text } from "react-native-paper";
+import MovieCard from "../movieCard/movieCard.component";
 
-type ElementsListProps = { data: Movie[] };
+type cardListProps = { data: Movie[] };
 
-const ElementsList = ({ data }: ElementsListProps) => {
-  return (
+const CardList = ({ data }: cardListProps) => {
+  return data.length ? (
     <FlatList
       data={data}
       renderItem={({ item }: ListRenderItemInfo<Movie>) => (
-        <ListItem
+        <MovieCard
           id={item.id}
           title={item.title}
           popularity={item.popularity}
@@ -20,7 +21,10 @@ const ElementsList = ({ data }: ElementsListProps) => {
       )}
       keyExtractor={(movie) => movie.id}
     />
+  ) : (
+    //conditionally render text if movies is !empty
+    <Text>{"No items were found that match your query."}</Text>
   );
 };
 
-export default ElementsList;
+export default CardList;

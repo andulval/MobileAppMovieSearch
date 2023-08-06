@@ -7,18 +7,14 @@ const reducer = combineReducers({
   movies: movieReducer,
   [tmdbApi.reducerPath]: tmdbApi.reducer,
 });
-//   reducer: {
-//     movies: movieReducer,
-//   },
-// });
+
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tmdbApi.middleware),
 });
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-// export const useAppDispatch: () => AppDispatch = useDispatch; // Export a hook that can be reused to resolve types
+
+// Export a hook that can be reused to resolve types
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 

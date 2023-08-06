@@ -7,9 +7,9 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
-  StatusBar,
 } from "react-native";
-import { RootStackParams } from "../../../MainApp";
+import { Button } from "react-native-paper";
+import { RootStackParams } from "../../../AppNavigator";
 import LogoIcon from "../../components/logoIcon/logoIcon.component";
 
 // type Props = NativeStackScreenProps<RootStackParams>;//React.FC<Props>
@@ -28,7 +28,6 @@ const Home = () => {
       style={styles.background}
     >
       <View>
-        <StatusBar animated backgroundColor="#000000" hidden={false} />
         <View style={styles.logoContainer}>
           <LogoIcon style={styles.logo} fill="#eeff00" />
           <Text style={styles.text}>
@@ -36,7 +35,7 @@ const Home = () => {
           </Text>
         </View>
         <TouchableOpacity onPress={buttonHandler} style={styles.ButonContainer}>
-          <Text style={styles.signup}>START</Text>
+          <Button style={styles.signup}>START</Button>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
   },
   ButonContainer: {
     // flex: 1,
-    marginTop: 120,
+    // marginTop: 120,
     // alignItems: "center",
     // justifyContent: "center",
   },
