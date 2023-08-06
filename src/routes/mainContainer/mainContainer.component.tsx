@@ -49,14 +49,16 @@ const MainContainer = () => {
     const searchFieldString = event.nativeEvent.text; // value.toLocaleLowerCase(); //includes are case senitive
     setSearchPhrase(searchFieldString);
   };
-
-  //   if (isLoading || isFetching) {
-  //     return <ActivityIndicator animating={true} size="large" />;
-  //   }
+  const onClearHandler =
+    () // triggered whenever input value change, set newValue to searchPhrase state variable
+    // e: GestureResponderEvent,
+    : void => {
+      //const searchFieldString = e.nativeEvent.text; // value.toLocaleLowerCase(); //includes are case senitive
+      setSearchPhrase("");
+    };
 
   if (isError) {
     if ("status" in error) {
-      // console.log({ error });
       return <Text>{error.status}</Text>;
     } //{!!error && <Text>Something went wrong!</Text>}
   }
@@ -67,14 +69,19 @@ const MainContainer = () => {
         searchPhrase={searchPhrase}
         placeholder="Search for a Movie"
         onChangeHandler={onSearchChange}
+        onClearHandler={onClearHandler}
       />
       {searchPhrase && ( //conditionally render text if searchPhrase is !empty
-        <View style={styles.searchText}>
+        <View style={styles.text}>
           <PlainText description="Search for: " mainValue={searchPhrase} />
         </View>
       )}
       {isLoading || isFetching ? (
-        <ActivityIndicator animating={true} size="large" />
+        <ActivityIndicator
+          style={styles.centerItemHV}
+          animating={true}
+          size="large"
+        />
       ) : (
         <CardList data={movies} />
       )}
@@ -85,26 +92,10 @@ const MainContainer = () => {
 const styles = StyleSheet.create({
   containerM: {
     flex: 1,
-    // backgroundColor: "#ECF0F1",
-    // alignItems: "center",
-    // justifyContent: "center",
-    // paddingHorizontal: 5,
-    // marginVertical: 8,
-    // width: "100%",
     // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
   },
-  searchText: {
-    // flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    // backgroundColor: "#ECF0F1",
-    // alignItems: "center",
-    // justifyContent: "center",
-    // paddingHorizontal: 5,
-    // marginVertical: 8,
-    // width: "100%",
-    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
-  },
+  centerItemHV: { flex: 1, justifyContent: "center", alignContent: "center" },
+  text: { justifyContent: "center", alignItems: "center", marginVertical: 10 },
 });
 
 export default MainContainer;

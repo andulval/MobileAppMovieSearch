@@ -1,24 +1,22 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StyleSheet} from "react-native";
 import React, { useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParams } from "../../../AppNavigator";
-import { Image } from "react-native";
 
 import { addMovies } from "../../store/movies/movies.slice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useGetDetailMovieQuery } from "../../utils/services/movie.service";
 import {
   ActivityIndicator,
-  Card,
-  Chip,
   IconButton,
-  ProgressBar,
   Snackbar,
   Text,
 } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ChipList } from "../../components/chipList/chipList.component";
 import { selectFavMovies } from "../../store/movies/movies.selector";
+import MovieCard from "../../components/movieCard/movieCard.component";
+import Description from "../../components/description/description.component";
+import TagsCard from "../../components/tagsCard/tagsCard.component";
 
 type Props = NativeStackScreenProps<RootStackParams, "MovieDetails">;
 
@@ -60,7 +58,6 @@ const MovieDetails = ({ route }: Props) => {
     isError,
     error,
   } = useGetDetailMovieQuery(id); //fetch data using RTK Query
-
   const {
     title,
     overview,
@@ -70,9 +67,6 @@ const MovieDetails = ({ route }: Props) => {
     production_countries,
     popularity = 100,
   } = data;
-  const urlImg = poster_path
-    ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-    : "https://placehold.co/154x231/png/?text=No\\nImage\\nAvailable"; //if no image - show placeholder
 
   useEffect(() => {
     //check if this movie isnt in the fav list
@@ -97,9 +91,10 @@ const MovieDetails = ({ route }: Props) => {
   };
 
   if (isLoading || isFetching) {
+    //during loading show spindle
     return (
       <ActivityIndicator
-        style={{ flex: 1, justifyContent: "center", alignContent: "center" }}
+        style={styles.viewCenterVH}
         animating={true}
         size="large"
       />
@@ -107,270 +102,29 @@ const MovieDetails = ({ route }: Props) => {
   }
 
   if (isError) {
+    //if error occur show error page
     if ("status" in error) {
       // console.log({ error });
-      return <Text>{error.status}</Text>;
+      return <Text style={styles.viewCenterVH}>{error.status}</Text>;
     } //{!!error && <Text>Something went wrong!</Text>}
   }
 
   return (
-    <SafeAreaView
-      style={{
-        marginVertical: 15,
-        marginHorizontal: 20,
-        flex: 1,
-        // flexDirection: "row",
-        // flexWrap: "wrap",
-        //   flexDirection: "row",
-        // alignContent: "center",
-        // justifyContent: "center",
-      }}
-    >
-      <ScrollView>
-        <Card
-          mode="elevated"
-          elevation={3}
-          style={{
-            flex: 1,
-            marginHorizontal: 10,
-            marginBottom: 20,
-            //   flexDirection: "row",
-            //   alignContent: "center",
-            //   justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              // marginVertical: 15,
-              // marginHorizontal: 30,
-              flex: 1,
-              // alignItems: "center",
-            }}
-          >
-            <View
-              style={{
-                // marginVertical: 15,
-                // marginHorizontal: 30,
-                flex: 1,
-                flexDirection: "row",
-                // alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  //   backgroundColor: "green",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  resizeMode="contain"
-                  style={{
-                    width: 154,
-                    height: 231,
-                    marginVertical: 15,
-                    marginHorizontal: 20,
-                    borderRadius: 5,
-                  }}
-                  source={{ uri: urlImg }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
+    <SafeAreaView style={styles.mainContainer}>
+      <ScrollView style={styles.scroll}>
+        <MovieCard
+          id={id}
+          title={title}
+          popularity={popularity}
+          poster_path={poster_path}
+          vote_count={vote_count}
+        />
+        <Description overview={overview}></Description>
+        <TagsCard genres={genres} production_countries={production_countries} />
 
-                  //   backgroundColor: "#771313",
-                }}
-              >
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    //   backgroundColor: "#771313",
-                  }}
-                >
-                  <Text variant="headlineMedium">{title}</Text>
-                </View>
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "space-around",
-                    // marginHorizontal: 10,
-                    // alignContent: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Chip
-                    // selected={true}
-                    style={{
-                      justifyContent: "center",
-                      alignSelf: "flex-start",
-                    }}
-                    icon="account-group"
-                    // mode="outlined"
-                  >
-                    Popularity:
-                    <Text variant="bodyMedium"> {Math.floor(popularity)}</Text>
-                  </Chip>
-
-                  <ProgressBar animatedValue={0.5} />
-                  <Chip
-                    style={{
-                      justifyContent: "center",
-                      alignSelf: "flex-start",
-                    }}
-                    icon="vote"
-                  >
-                    Votes: {vote_count}
-                  </Chip>
-                </View>
-              </View>
-            </View>
-          </View>
-        </Card>
-        <Card
-          mode="elevated"
-          elevation={3}
-          style={{
-            flex: 1,
-            marginHorizontal: 10,
-            marginBottom: 20,
-            // paddingHorizontal: 20,
-            //   flexDirection: "row",
-            //   alignContent: "center",
-            //   justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              marginVertical: 15,
-              marginHorizontal: 30,
-              flex: 1,
-              // alignItems: "center",
-            }}
-          >
-            {overview.length !== 0 ? (
-              <View
-                style={{
-                  // marginVertical: 15,
-                  // marginHorizontal: 30,
-                  flex: 1,
-                  // alignItems: "center",
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <View
-                    style={{ flex: 1, height: 1, backgroundColor: "black" }}
-                  />
-                  <View>
-                    <Text
-                      variant="labelLarge"
-                      style={{ textAlign: "center", paddingHorizontal: 10 }}
-                    >
-                      Description
-                    </Text>
-                  </View>
-                  <View
-                    style={{ flex: 1, height: 1, backgroundColor: "black" }}
-                  />
-                </View>
-                <Text style={{ textAlign: "justify" }} variant="bodyMedium">
-                  {overview}
-                </Text>
-              </View>
-            ) : (
-              <Text>No overview available.</Text>
-            )}
-          </View>
-        </Card>
-        <Card
-          mode="elevated"
-          elevation={3}
-          style={{
-            flex: 1,
-            marginHorizontal: 10,
-            marginBottom: 20,
-            //   flexDirection: "row",
-            //   alignContent: "center",
-            //   justifyContent: "center",
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginVertical: 20,
-              marginHorizontal: 20,
-            }}
-          >
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <Chip
-                style={{
-                  justifyContent: "center",
-                  alignSelf: "flex-start",
-                }}
-                icon="flag"
-                mode="outlined"
-              >
-                Genres
-              </Chip>
-              <ChipList elements={genres}></ChipList>
-            </View>
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <Chip
-                style={{
-                  justifyContent: "center",
-                  alignSelf: "flex-start",
-                }}
-                icon="crosshairs-gps"
-                mode="outlined"
-              >
-                Production
-              </Chip>
-              <ChipList
-                // style={{
-                //   justifyContent: "center",
-                //   alignSelf: "flex-start",
-                // }}
-                elements={production_countries}
-              ></ChipList>
-            </View>
-          </View>
-
-          {/* <Button
-            onPress={onPressAddFavButton}
-            title="Add Fav movie"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          /> */}
-          <Snackbar
-            visible={snackbarVisible}
-            onDismiss={() => setSnackbarVisible(false)}
-            // onClose={handleClose}
-            // anchorOrigin={ {'10%', '80%' }}
-            action={{
-              label: "Close",
-            }}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "center",
-            // }}
-            // sx={{ position: "absolute" }}
-          >
-            Movie added to your Favorite list!
-          </Snackbar>
-        </Card>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.favButton}>
           <IconButton
             icon="heart"
-            // iconColor={MD3Colors.error50}
             mode="contained-tonal"
             size={30}
             onPress={onPressAddFavButton}
@@ -378,20 +132,47 @@ const MovieDetails = ({ route }: Props) => {
           />
         </View>
       </ScrollView>
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        action={{
+          label: "Close",
+        }}
+      >
+        Movie added to your Favorite list!
+      </Snackbar>
     </SafeAreaView>
   );
 };
 
-// const styles = StyleSheet.create({
-//   item: {
-//     backgroundColor: "#36363121",
-//     padding: 20,
-//     marginVertical: 8,
-//     marginHorizontal: 16,
-//   },
-//   title: {
-//     fontSize: 25,
-//   },
-// });
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    // paddingTop: 0,
+    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+    // marginVertical: 15,
+    // marginHorizontal: 20,
+  },
+  scroll: {
+    flex: 1,
+    paddingTop: 5,
+    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+    // marginVertical: 15,
+    // marginHorizontal: 20,
+  },
+  viewCenterVH: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
+  favButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+});
 
 export default MovieDetails;

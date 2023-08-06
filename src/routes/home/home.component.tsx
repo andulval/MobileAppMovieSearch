@@ -3,12 +3,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack/lib/ty
 import React from "react";
 import {
   StyleSheet,
-  Text,
   View,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import { RootStackParams } from "../../../AppNavigator";
 import LogoIcon from "../../components/logoIcon/logoIcon.component";
 
@@ -30,12 +29,12 @@ const Home = () => {
       <View>
         <View style={styles.logoContainer}>
           <LogoIcon style={styles.logo} fill="#eeff00" />
-          <Text style={styles.text}>
+          <Text variant="bodyMedium" style={styles.text}>
             Search fo any movie. Make best choice. Enjoy!
           </Text>
         </View>
         <TouchableOpacity onPress={buttonHandler} style={styles.ButonContainer}>
-          <Button style={styles.signup}>START</Button>
+          <Button style={styles.startButton}>START</Button>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -56,11 +55,26 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     width: "100%",
   },
-  ButonContainer: {
+  startButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "transparent",
+    borderRadius: 8,
+    padding: 5,
+    // height: 40,
+    borderWidth: 1,
+    borderColor: "green",
     // flex: 1,
+
     // marginTop: 120,
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  ButonContainer: {
+    // flex: 1,
+    // marginTop: 120,
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     width: 300,
@@ -76,18 +90,6 @@ const styles = StyleSheet.create({
     // marginBottom: "-25%",
     marginLeft: "20%",
     marginRight: "20%",
-  },
-  signup: {
-    backgroundColor: "white",
-    color: "#0f1639",
-    width: "75%",
-    borderRadius: 25,
-    textAlign: "center",
-    fontWeight: "bold",
-    marginLeft: "11%",
-    padding: "2%",
-    fontSize: 27,
-    marginTop: "70%",
   },
 });
 

@@ -42,6 +42,7 @@ const AppNavigator = () => {
                 onPress={() => navigation.navigate("FavoriteMovies")}
               />
             ),
+            title: "Movie Search",
             // headerStyle: { backgroundColor: "#fbff00" },
           })}
         />
