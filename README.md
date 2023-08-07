@@ -41,7 +41,7 @@ Spis wymaganych technologii przy pracy z zadaniem:
 ## 🖼️ Screenshots
 ->HomePage<br>
 Ekran powitalny<br>
-<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691370994/github%20screenshots/flow2code/c00_olwtab.png" width="300">
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691373706/github%20screenshots/flow2code/homePage_o2dwdv.png" width="300">
 
 ->Strona główna<br>
 Przy pierwszym uruchomieniu i bez wprowadzania tekstu wyszukania następuje domyślne wyswietlonie listy najbardziej popularnych produkcji. Przy wszystkich requestach do Api wyświetlany jest ekran ładowania, sygnalizujący pobieranie informacji z serwera.
