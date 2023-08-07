@@ -67,6 +67,8 @@ const styles = StyleSheet.create({
     // width: "100%",
   },
   startButton: {
+    // width: 200,
+    // height: 100,
     justifyContent: "center",
     alignItems: "center",
   },

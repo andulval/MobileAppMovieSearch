@@ -37,19 +37,19 @@ const MovieCard = (movie: Movie) => {
             />
           </View>
           <View style={styles.sub2View}>
-            <View style={styles.sub2View}>
-              <Text variant="headlineMedium">{title}</Text>
+            <View style={styles.sub3View}>
+              <Text variant="headlineSmall">{title}</Text>
             </View>
             <View style={styles.wrapedView}>
               <Chip style={styles.chip} icon="account-group">
-                <Text variant="labelLarge">
+                <Text variant="labelMedium">
                   Popularity: {Math.floor(popularity)}
                 </Text>
               </Chip>
 
-              <ProgressBar animatedValue={0.65} />
+              <ProgressBar animatedValue={0.65} style={styles.progressBar} />
               <Chip style={styles.chip} icon="vote">
-                <Text variant="labelLarge">Votes: {vote_count}</Text>
+                <Text variant="labelMedium">Votes: {vote_count}</Text>
               </Chip>
             </View>
           </View>
@@ -76,6 +76,11 @@ const styles = StyleSheet.create({
   sub2View: {
     flex: 1,
     justifyContent: "center",
+    width: "80%",
+  },
+  sub3View: {
+    flex: 1,
+    justifyContent: "center",
   },
   image: {
     width: 154,
@@ -90,6 +95,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginVertical: 10,
     flexWrap: "wrap",
+  },
+  progressBar: {
+    width: "70%",
   },
 });
 

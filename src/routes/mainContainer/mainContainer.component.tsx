@@ -92,6 +92,7 @@ const MainContainer = () => {
 const styles = StyleSheet.create({
   containerM: {
     flex: 1,
+    backgroundColor: "#c3b5a467",
     // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
   },
   centerItemHV: { flex: 1, justifyContent: "center", alignContent: "center" },

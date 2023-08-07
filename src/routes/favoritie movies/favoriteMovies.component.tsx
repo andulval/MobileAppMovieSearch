@@ -31,6 +31,7 @@ const FavoriteMovies = () => {
 const styles = StyleSheet.create({
   containerF: {
     flex: 1,
+    backgroundColor: "#c3b5a467",
     // backgroundColor: "#1c525f8d",
     // alignItems: "center",
     // justifyContent: "center",

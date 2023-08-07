@@ -1,4 +1,4 @@
-import { ScrollView, View, StyleSheet} from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParams } from "../../../AppNavigator";
@@ -148,17 +148,11 @@ const MovieDetails = ({ route }: Props) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    // paddingTop: 0,
-    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
-    // marginVertical: 15,
-    // marginHorizontal: 20,
+    backgroundColor: "#c3b5a44e",
   },
   scroll: {
     flex: 1,
     paddingTop: 5,
-    // marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
-    // marginVertical: 15,
-    // marginHorizontal: 20,
   },
   viewCenterVH: {
     flex: 1,
