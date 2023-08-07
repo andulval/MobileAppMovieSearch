@@ -68,7 +68,7 @@ Użytkownik może dodać dany film do swojej listy Ulubionych, poprzez kliknieci
 ->Lista ulubionych filmów<br>
 Użytkownik może przejść do swojej listy Ulubionych filmów poprzez klikniecie ikonki serca w prawej-górnej części ekranu (Strona wyszukiwania filmów)<br>
 <img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369122/github%20screenshots/flow2code/c1_qtyvuy.png" width="300">
-Widok lity Ulubionych:
+Widok listy Ulubionych:
 <img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369127/github%20screenshots/flow2code/c8_ekk0k8.png" width="300">
 
 ## 💻 Getting started
