@@ -39,33 +39,37 @@ Spis wymaganych technologii przy pracy z zadaniem:
 >ESLint, Prettier
 
 ## 🖼️ Screenshots
->HomePage
-Ekran powitalny
-![home](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369200/github%20screenshots/flow2code/c0_z7zgse.png)
+->HomePage<br>
+Ekran powitalny<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691370994/github%20screenshots/flow2code/c00_olwtab.png" width="300">
 
->Strona główna
-Przy pierwszym uruchomieniu i bez wprowadzania tesktu wyszukania domyślnie zostaje wyswietlona lista aktualnie najbardziej popularnych produkcji
-![Shop page](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369122/github%20screenshots/flow2code/c1_qtyvuy.png)
-
-->Wyszukiwanie
-Przy wyszukiwaniu natychmiastowo uruchamiane są requesty do TMDB API, która zwraca listę która jest na bieżąco wyświetlana 
-![Mini cart ](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369080/github%20screenshots/flow2code/c3_potjpx.png)
-
-->Brak filmów
-Jeśli w bazie danych nie ma filmów zawierających podana frazę pojawia się odpowiedni komunikat 
-![Single Category page](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691368959/github%20screenshots/flow2code/c4_tttgoq.png)
-
-->Login & Register page
-![login](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1684587617/github%20screenshots/crwn-clothing/crwn7_sign_in_x46jpj.png)
-
-->Cart page
-![Cart](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1684587631/github%20screenshots/crwn-clothing/crwn4_xerf2g.png)
-
-->Payment
-![Payment](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1684587635/github%20screenshots/crwn-clothing/crwn5_hmbbp4.png)
-
-->Payment successful
-![Payment](https://res.cloudinary.com/ddlzbo6ut/image/upload/v1684587617/github%20screenshots/crwn-clothing/crwn6_b6st5q.png)
+->Strona główna<br>
+Przy pierwszym uruchomieniu i bez wprowadzania tekstu wyszukania następuje domyślne wyswietlonie listy najbardziej popularnych produkcji. Przy wszystkich requestach do Api wyświetlany jest ekran ładowania, sygnalizujący pobieranie informacji z serwera.
+><br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369122/github%20screenshots/flow2code/c1_qtyvuy.png" width="300">
+<br>
+->Wyszukiwanie<br>
+Przy wyszukiwaniu natychmiastowo uruchamiane są requesty do TMDB API, która zwraca listę filmów spełniających wymagania. Użytkownik na bierząco widzi efekt wyszukiwania<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369080/github%20screenshots/flow2code/c3_potjpx.png" width="300">
+<br>
+->Brak filmów<br>
+Jeśli w bazie danych nie ma filmów zawierających podana frazę pojawia się odpowiedni komunikat<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691368959/github%20screenshots/flow2code/c4_tttgoq.png" width="300">
+<br>
+->Szczegóły filmu<br>
+Po kliknięciu w kafelek danego filmu, użytkownik przekierowywany jest do strony z szczegółowymi informacjami 
+<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369035/github%20screenshots/flow2code/c7_b9us4s.png" width="300">
+<br>
+->Dodawanie do ulubionych<br>
+Użytkownik może dodać dany film do swojej listy Ulubionych, poprzez klikniecie ikonki serca w dolnej części widoku. Pojawia się odpowiedni komunikat sygnalizujący poprawne dodanie filmu do kolekcji ulubionych.<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369076/github%20screenshots/flow2code/c6_am1col.png" width="300">
+<br>
+->Lista ulubionych filmów<br>
+Użytkownik może przejść do swojej listy Ulubionych filmów poprzez klikniecie ikonki serca w prawej-górnej części ekranu (Strona wyszukiwania filmów)<br>
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369122/github%20screenshots/flow2code/c1_qtyvuy.png" width="300">
+Widok lity Ulubionych:
+<img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369127/github%20screenshots/flow2code/c8_ekk0k8.png" width="300">
 
 ## 💻 Getting started
 
