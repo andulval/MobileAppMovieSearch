@@ -1,6 +1,5 @@
 # React Native
 Movie Search is a mobile application that connects to a movie DB to search for any movie that matches your query. The application has the ability to add a list of favorites.
-(https://developers.themoviedb.org/).
 
 ## 🚀 Functionalities
 
