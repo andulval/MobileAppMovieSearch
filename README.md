@@ -1,6 +1,24 @@
 # Mobile App - Movie Search - React Native
 Movie Search is a mobile application that connects to a movie DB to search for any movie that matches your query. The application has the ability to add a list of favorites.
 
+
+## 🚀 Technologies Used:
+
+>react-native
+
+>react-navigation
+
+>typescript
+
+>Redux RTK
+
+>RTK Query
+
+>react-native-paper
+
+>ESLint, Prettier
+
+
 ## 🚀 Functionalities
 
 ● you can search for any movie,
@@ -35,22 +53,6 @@ List of required technologies when working with the task:
 ● react-navigation
 
 ● typescript
-
-## 🚀 Technologies Used:
-
->react-native
-
->react-navigation
-
->typescript
-
->Redux RTK
-
->RTK Query
-
->react-native-paper
-
->ESLint, Prettier
 
 ## 🖼️ Screenshots
 ->HomePage<br>
