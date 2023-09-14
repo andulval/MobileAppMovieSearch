@@ -65,7 +65,7 @@ When you run it for the first time and without entering the search text, a list 
 <img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369122/github%20screenshots/flow2code/c1_qtyvuy.png" width="300">
 <br>
 ->Searching<br>
-During the search, requests are made immediately to the TMDB API, which returns a list of movies that meet the requirements. The user sees the effect of the search in real time
+During the search, requests are made immediately to the TMDB API, which returns a list of movies that meet the requirements. The user sees the effect of the search in real time<br>
 <img src="https://res.cloudinary.com/ddlzbo6ut/image/upload/v1691369080/github%20screenshots/flow2code/c3_potjpx.png" width="300">
 <br>
 ->No found<br>
